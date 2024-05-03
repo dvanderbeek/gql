@@ -4,9 +4,9 @@ module Mutations
   class PostCreate < BaseMutation
     description "Creates a new post"
 
-    field :post, Types::PostType, null: false
+    field :post, Types::Objects::PostType, null: false
 
-    argument :post_input, Types::PostInputType, required: true
+    argument :post_input, Types::Inputs::PostInputType, required: true
 
     def resolve(post_input:)
       post = ::Post.new(**post_input)

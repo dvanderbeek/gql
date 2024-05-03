@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Types
-  class PostInputType < Types::BaseInputObject
+  class Inputs::PostInputType < Types::BaseInputObject
     argument :id, ID, required: false
     argument :title, String, required: false
     argument :content, String, required: false
