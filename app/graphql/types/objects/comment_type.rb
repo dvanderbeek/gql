@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Types
-  class CommentType < Types::BaseObject
+  class Objects::CommentType < Types::BaseObject
     field :id, ID, null: false
     field :message, String
     field :post_id, Integer, null: false
