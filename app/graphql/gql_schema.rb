@@ -18,9 +18,16 @@ class GqlSchema < GraphQL::Schema
 
   # Union and Interface Resolution
   def self.resolve_type(abstract_type, obj, ctx)
-    # TODO: Implement this method
-    # to return the correct GraphQL object type for `obj`
-    raise(GraphQL::RequiredImplementationMissingError)
+    case obj
+    when Post
+      Types::Objects::PostType
+    when Comment
+      Types::Objects::CommentType
+    when Crypto::Token
+      Types::Objects::Crypto::TokenType
+    else
+      raise("Unexpected object: #{obj}")
+    end
   end
 
   # Limit the size of incoming queries:
