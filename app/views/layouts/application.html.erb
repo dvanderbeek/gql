@@ -10,7 +10,9 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="bg-zinc-50 font-sans dark:bg-zinc-950">
+    <div class="relative mx-auto lg:max-w-7xl">
+      <%= yield %>
+    </div>
   </body>
 </html>

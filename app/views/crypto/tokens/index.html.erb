@@ -1,0 +1,13 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Tokens</h1>
+
+<div id="crypto_tokens">
+  <% @crypto_tokens.each do |crypto_token| %>
+    <%= link_to crypto_token do %>
+      <%= render crypto_token %>
+    <% end %>
+  <% end %>
+</div>
+
+<%= link_to "New token", new_crypto_token_path %>

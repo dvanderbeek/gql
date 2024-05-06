@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @crypto_token %>
+
+<div>
+  <%= link_to "Edit this token", edit_crypto_token_path(@crypto_token) %> |
+  <%= link_to "Back to tokens", crypto_tokens_path %>
+
+  <%= button_to "Destroy this token", @crypto_token, method: :delete %>
+</div>

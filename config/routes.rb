@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :crypto do
+    resources :tokens
+  end
   resources :comments
   resources :posts
   if Rails.env.development?
