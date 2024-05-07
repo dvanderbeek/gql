@@ -27,8 +27,9 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    service.send("create_#{resource_name}", permitted_params, success, failure) do |resource|
+    service.send("create_#{resource_name}", send("#{resource_name}_params"), success, failure) do |resource|
       instance_variable_set("@#{resource_name}", resource)
+      @resource = resource
     end
   end
 
@@ -38,7 +39,7 @@ class ApplicationController < ActionController::Base
   def update
     success = lambda do |resource|
       respond_to do |format|
-        format.html { redirect_to post_url(@resource), notice: "#{resource_name.to_s.titleize}  was successfully updated." }
+        format.html { redirect_to @resource, notice: "#{resource_name.to_s.titleize}  was successfully updated." }
         format.json { render :show, status: :ok, location: @resource }
       end
     end
@@ -50,7 +51,7 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    service.send("update_#{resource_name}", @resource, permitted_params, success, failure)
+    service.send("update_#{resource_name}", @resource, send("#{resource_name}_params"), success, failure)
   end
 
   def destroy

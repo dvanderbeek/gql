@@ -3,6 +3,10 @@ class Blog
   # Service.load_resources(Post, options)
   # Or have a base service that handles the simple cases and let you override when needed.
 
+  # Steps to add a new RESTful Resource:
+  # * Run scaffold generator
+  # * Delete controller actions
+  # * Create service API
   # Requires the service to implement these methods, and the resource should be an AR Model or ActiveModel::Model that implements .valid? and .errors
 
   # POSTS API
@@ -41,5 +45,24 @@ class Blog
 
   def self.load_comment(id)
     comment = Comment.find(id)
+  end
+
+  # CATEGORIES API
+  def self.create_category(attrs, success, failure)
+    category = Category.create(**attrs)
+    yield category
+    category.valid? ? success.call(category) : failure.call(category)
+  end
+
+  def self.update_category(category, attrs, success, failure)
+    category.update(attrs) ? success.call(category) : failure.call(category)
+  end
+
+  def self.load_categories
+    Category.all
+  end
+
+  def self.load_category(id)
+    category = Category.find(id)
   end
 end
