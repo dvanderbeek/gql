@@ -1,1 +1,1 @@
-json.partial! "posts/post", post: @resource
+json.partial! "posts/post", post: @post

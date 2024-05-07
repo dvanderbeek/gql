@@ -1,1 +1,1 @@
-json.array! @resources, partial: "posts/post", as: :post
+json.array! @posts, partial: "posts/post", as: :post

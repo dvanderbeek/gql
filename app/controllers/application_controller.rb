@@ -2,14 +2,14 @@ class ApplicationController < ActionController::Base
   before_action :load_resource, only: %i[ show edit update destroy ]
 
   def index
-    @resources = service.send("load_#{resource_name.to_s.pluralize}")
+    instance_variable_set("@#{resource_name.to_s.pluralize}", service.send("load_#{resource_name.to_s.pluralize}"))
   end
 
   def show
   end
 
   def new
-    @resource = resource_klass.new
+    instance_variable_set("@#{resource_name}", resource_klass.new)
   end
 
   def create
@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
     end
 
     service.send("create_#{resource_name}", permitted_params, success, failure) do |resource|
-      @resource = resource
+      instance_variable_set("@#{resource_name}", resource)
     end
   end
 
@@ -66,5 +66,9 @@ class ApplicationController < ActionController::Base
 
   def load_resource
     @resource = service.send("load_#{resource_name}", params[:id])
+    instance_variable_set("@#{resource_name}", @resource)
   end
+
+  def resource_name; params[:controller].singularize ; end
+  def resource_klass; resource_name.classify.constantize; end
 end
